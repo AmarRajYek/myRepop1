@@ -19,9 +19,18 @@ class Simple{
         }
     }
 
+     public int Divby4(int ele){
+            if(ele%4==0){
+                return ele;
+            }else{
+                return 0;
+            }
+        }
+
      public static void main(String args[]){
         Simple sc  = new Simple();
         sc.Odd();
         sc.Even();
+        sc.Divby4(2);
     }
 }
