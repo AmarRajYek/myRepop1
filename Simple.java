@@ -31,11 +31,17 @@ class Simple{
             System.out.println("Upgraded to Version 2.0");
         }
 
+        public int sum(int a,int b){
+            int sum =  a+b;
+            return sum;
+        }
+
      public static void main(String args[]){
         Simple sc  = new Simple();
         sc.Odd();
         sc.Even();
         sc.Divby4(2);
         sc.Version();
+        System.out.println(sc.sum(4,5));
     }
 }
