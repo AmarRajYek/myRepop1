@@ -1,6 +1,6 @@
 class Simple{
 
-    void Odd(){
+   public  void Odd(){
         System.err.println("Printing Odd Nums");
         for(int i=1;i<20;i++){
             if(i%2!=0){
@@ -27,10 +27,15 @@ class Simple{
             }
         }
 
+        void Version(){
+            System.out.println("Version 1.0");
+        }
+
      public static void main(String args[]){
         Simple sc  = new Simple();
         sc.Odd();
         sc.Even();
         sc.Divby4(2);
+        sc.Version();
     }
 }
