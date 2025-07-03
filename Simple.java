@@ -28,7 +28,7 @@ class Simple{
         }
 
         void Version(){
-            System.out.println("Version 1.0");
+            System.out.println("Upgraded to Version 2.0");
         }
 
      public static void main(String args[]){
