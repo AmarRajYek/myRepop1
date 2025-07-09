@@ -43,6 +43,17 @@ class Simple{
             System.out.println("XOR ::"+(ele^b));
             
         }
+
+        //method to find misssing element in an Array
+        static int MissNum(int[] arr){
+            for(int i=0;i<arr.length-1;i++){
+                if(arr[i+1] - arr[i] > 1){
+                    return arr[i] +1;
+                }
+            }
+                return -1;
+        }
+
      public static void main(String args[]){
         Simple sc  = new Simple();
         sc.Odd();
@@ -51,5 +62,8 @@ class Simple{
         sc.Version();
         System.out.println(sc.sum(4,5));
         sc.BitWise(10);
+
+        int arr[] = {1,2,4,5,6};
+        System.out.println("The Missing element is :: "+MissNum(arr));
     }
 }
