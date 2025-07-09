@@ -36,6 +36,13 @@ class Simple{
             return sum;
         }
 
+        public void BitWise(int ele){
+            int b  = 5;
+            System.out.println("left shift ::"+(ele << 1));
+            System.out.println("right shift:: "+(ele >> 1));
+            System.out.println("XOR ::"+(ele^b));
+            
+        }
      public static void main(String args[]){
         Simple sc  = new Simple();
         sc.Odd();
@@ -43,5 +50,6 @@ class Simple{
         sc.Divby4(2);
         sc.Version();
         System.out.println(sc.sum(4,5));
+        sc.BitWise(10);
     }
 }
