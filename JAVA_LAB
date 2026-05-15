@@ -1,0 +1,234 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++>>>Producer==Consumer+++++++++++++++++++++++++++++++++++++++++++++++++++
+class Buffer{
+    int data;
+    boolean avail = false;
+
+    synchronized void produce(int value){
+        try {
+            while(avail){
+                wait();
+            }
+
+            data = value;
+
+            System.out.println("Produced : " + data);
+
+            avail = true;
+
+            notify();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // consume method
+    synchronized void consume(){
+        try {
+
+            while(!avail){
+                wait();
+            }
+
+            System.out.println("Consumed : " + data);
+
+            avail = false;
+
+            notify();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class Producer extends Thread{
+
+    Buffer b;
+
+    Producer(Buffer b){
+        this.b = b;
+    }
+
+    public void run(){
+
+        for(int i = 0; i < 5; i++){
+
+            b.produce(i);
+
+        }
+    }
+}
+
+class Consumer extends Thread{
+
+    Buffer b;
+
+    Consumer(Buffer b){
+        this.b = b;
+    }
+
+    public void run(){
+
+        for(int i = 0; i < 5; i++){
+
+            b.consume();
+
+        }
+    }
+}
+public class Threads2{
+
+    public static void main(String[] args) {
+
+        Buffer b = new Buffer();
+
+        Producer p = new Producer(b);
+
+        Consumer c = new Consumer(b);
+
+        p.start();
+
+        c.start();
+    }
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++>>>ExceptionHandling+++++++++++++++++++++++++++++++++++++++++++++++++++
+public class ExceptionH {
+    public static void main(String[] args) {
+        try {
+            int a=10,b=0;
+            int res = a/b;
+            System.out.println(res);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot Divide by Zero");
+        }
+        System.out.println("Program continues...");
+    }
+}
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++>>>MULtiplication+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.Scanner;
+
+public class MatrixMul {
+    public static void main(String[] args) {
+        int r1,c1,r2,c2;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Number of rows & colns in Matrix A:");
+        r1 = sc.nextInt();
+        c1 = sc.nextInt();
+        System.out.println("Enter Number of rows & colns in Matrix B:");
+        r2 = sc.nextInt();
+        c2 = sc.nextInt();
+        if(c1!=r2){
+            System.out.println("<!> Matrix Multiplication is not possible <!> ");
+            return;
+        }
+        int A[][] = new int[r1][c1];
+        int B[][] = new int[r2][c2];
+        int res[][] = new int[r1][c2];
+        System.out.println("Enter "+(r1*c1)+ "Elements in Matrix A: ");
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c1; j++) {
+                A[i][j] = sc.nextInt(); 
+                
+            }
+        }
+        System.out.println("Enter "+(r2*c2)+ "Elements in Matrix B: ");
+        for (int i = 0; i < r2; i++) {
+            for (int j = 0; j < c2; j++) {
+                B[i][j] = sc.nextInt(); 
+                
+            }
+        }
+
+        //Multiplication
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                for (int k=0; k < c1; k++) {
+                    res[i][j] += A[i][k] * B[k][j];   
+                }   
+            } 
+        }
+
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                System.out.print(res[i][j]+ " "); 
+            }
+            System.out.println();
+        }
+
+    }
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++>>>INHERITANCE+++++++++++++++++++++++++++++++++++++++++++++++++++
+class Animal
+{
+    void eat() 
+    {
+        System.out.println("Animal is eating");
+    }
+}
+class Dog extends Animal
+{
+    void bark() 
+    {
+        System.out.println("Dog is barking");
+    }
+}
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        Dog d = new Dog();
+        d.eat();
+        d.bark();
+    }
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++>>>ARmstrong+++++++++++++++++++++++++++++++++++++++++++++++++++
+public class Armstrong {
+    public static boolean isArmstrong(int n) {
+        int original = n, sum = 0, digits = String.valueOf(n).length();
+        while (n != 0) {
+            int digit = n % 10;
+            sum += (int) Math.pow(digit, digits); // power is 'digits'
+            n /= 10;
+        }
+        return sum == original;
+    }
+public static void main(String[] args) {
+    //void main(){
+        System.out.println("Result is : "+isArmstrong(67));     
+}
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++>>>PALINDROME+++++++++++++++++++++++++++++++++++++++++++++++++++
+import java.util.Scanner;
+public class PalindromeNumber 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int num, original, reverse = 0, remainder;
+        System.out.print("Enter a number: "); 
+        num = sc.nextInt();
+        original = num;
+        while (num != 0) 
+        {
+            remainder = num % 10;
+            reverse = reverse * 10 + remainder;
+            num = num / 10;
+        }
+        if (original == reverse) 
+        {
+            System.out.println("Palindrome number");
+        } 
+        else 
+        {
+            System.out.println("Not a palindrome");
+        }
+    }
+}
