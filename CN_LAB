@@ -69,6 +69,50 @@ int main()
                    rt[i].dist[j]);
         }
     }
-
     return 0;
+}
+
+
+================================.............>>>>>>>.Charecter Stuffing
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+int main(){
+	int i =0,j=0,n,pos;
+	char a[100],b[200],ch;
+	printf("enter String:");
+	scanf("%s",a);
+	n = strlen(a);
+	printf("Enter Position:");
+	scanf("%d",&pos);
+	while(pos>n){
+		printf("Invalid Position");
+		scanf("%d",&pos);
+	}
+	printf("Enter charecter to insert:");
+	getchar();
+	ch = getchar();
+	b[j++] = 'd';
+	b[j++] = 'l';
+	b[j++] = 'e';
+	b[j++] = 's';
+	b[j++] = 't';
+	b[j++] = 'x';
+	while(i<n){
+		if(i==pos-1){
+			b[j++] = 'd';b[j++] = 'l';b[j++] = 'e';
+			b[j++] = ch;
+			b[j++] = 'd';b[j++] = 'l';b[j++] = 'e';
+		}
+		if (i < n - 2 && a[i] == 'd' && a[i+1] == 'l' && a[i+2] == 'e'){
+			b[j++] = 'd';b[j++] = 'l';b[j++] = 'e';
+		}
+		b[j++] = a[i++];	
+	}
+	b[j++] = 'd';b[j++] = 'l';b[j++] = 'e';
+	b[j++] = 'e';b[j++] = 't';b[j++] = 'x';
+	b[j] = '\0';
+	
+	printf("\nFrame after stuffing:\n%s\n", b); 
+	return 0;
 }
