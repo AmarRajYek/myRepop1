@@ -1,3 +1,72 @@
+=================++++++++++++++++++++++COPY FILE+++++++++++++++++++++++++++==============================
+sf = input("Enter source :")
+df = input("Enter destination  :")
+try:
+    file1 = open(sf,'r')
+    data = file1.read()
+    file1.close()
+    
+    file2 = open(df,'w')
+    file2.write(data)
+    file2.close()
+    print("Successfully")
+except FileNotFoundError:
+    print("File not found")
+except Exception as e:
+    print("Error accured :",e)
+    
+=================++++++++++++++++++++++Arthematic+++++++++++++++++++++++++++==============================
+# diff numeric datatypes
+n1 = 10
+n2 = 3.14
+n3 = 2 + 3j
+
+print("Integer:", n1, type(n1))
+print("Float:", n2, type(n2))
+print("Complex:", n3, type(n3))
+
+# Arithmetic operations
+sum = n1 + n2
+diff = n1 - n2
+product = n1 * n3
+division = n1 / n2
+floor_div = n1 // n2
+modulo = n1 % 3
+expo = n1 ** 2
+
+print("\nArithmetic Operations:")
+print("Sum:", sum)
+print("Difference:", diff)
+print("Product:", product) 
+print("Division:", division)
+print("Floor division:", floor_div)
+print("Modulo:", modulo)
+print("Exponential:", expo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
