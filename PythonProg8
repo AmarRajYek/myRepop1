@@ -46,7 +46,17 @@ print("Exponential:", expo)
 
 
 
+=========================================================================================================================================================
+In the context of backpropagation, "gradients" refer to the slopes of the error function with respect to the weights and biases of a neural network.
 
+Imagine you're at the top of a hill (representing the error). The gradient tells you the direction and steepness of the path downwards. 
+In backpropagation, we want to find the lowest point of the "error hill," so we use the gradients to know how much and in what direction to adjust the weights and biases to reduce the error.
+A larger gradient means a steeper slope and thus a larger adjustment is needed, while a smaller gradient indicates a flatter slope and a smaller adjustment.
+
+
+
+
+=========================================================================================================================================================
 
 
 
