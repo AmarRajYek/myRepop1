@@ -3,49 +3,57 @@
 
 struct process
 {
-    int alloc[10], max[10], need[10], finish;
+    int all[10], max[10], need[10], flag;
 };
 
 int main()
 {
     struct process p[10];
-    int n, r, avail[10], seq[10];
-    int i, j, k, count = 0, safe = 1;
 
-    printf("Enter no. of processes: ");
+    int n, r, i, j, k;
+    int avail[10], seq[10];
+    int count = 0, fl = 0, safe = 1;
+
+    printf("Enter number of processes: ");
     scanf("%d", &n);
 
-    printf("Enter no. of resources: ");
+    printf("Enter number of resources: ");
     scanf("%d", &r);
+
+    // Input Allocation & Max
     for(i = 0; i < n; i++)
     {
-        printf("\nProcess P%d\n", i);
+        printf("\nEnter details for P%d\n", i);
 
         printf("Allocation: ");
         for(j = 0; j < r; j++)
-            scanf("%d", &p[i].alloc[j]);
+            scanf("%d", &p[i].all[j]);
 
         printf("Max: ");
         for(j = 0; j < r; j++)
         {
             scanf("%d", &p[i].max[j]);
-            p[i].need[j] = p[i].max[j] - p[i].alloc[j];
+
+            // Need Calculation
+            p[i].need[j] = p[i].max[j] - p[i].all[j];
         }
 
-        p[i].finish = 0;
+        p[i].flag = 0;
     }
 
-    printf("\nAvailable Resources: ");
+    // Available Resources
+    printf("\nEnter Available Resources: ");
     for(i = 0; i < r; i++)
         scanf("%d", &avail[i]);
 
-    while(count < n)
+    // Banker's Algorithm
+    while(count != n)
     {
         int found = 0;
 
         for(i = 0; i < n; i++)
         {
-            if(!p[i].finish)
+            if(p[i].flag == 0)
             {
                 int possible = 1;
 
@@ -58,19 +66,25 @@ int main()
                     }
                 }
 
+                // Process can execute
                 if(possible)
                 {
-                    for(k = 0; k < r; k++)
-                        avail[k] += p[i].alloc[k];
+                    printf("\nP%d is visited", i);
 
-                    seq[count++] = i;
-                    p[i].finish = 1;
+                    seq[fl++] = i;
+                    p[i].flag = 1;
+
+                    for(k = 0; k < r; k++)
+                        avail[k] += p[i].all[k];
+
+                    count++;
                     found = 1;
                 }
             }
         }
 
-        if(!found)
+        // Unsafe State
+        if(found == 0)
         {
             safe = 0;
             break;
@@ -80,18 +94,41 @@ int main()
     // Output
     if(safe)
     {
-        printf("\nSystem is in SAFE state\nSafe Sequence: ");
-        for(i = 0; i < n; i++)
+        printf("\n\nSYSTEM IS IN SAFE STATE");
+
+        printf("\nSafe Sequence: ");
+        for(i = 0; i < fl; i++)
             printf("P%d ", seq[i]);
     }
     else
     {
-        printf("\nSystem is in UNSAFE state");
+        printf("\nSYSTEM IS IN UNSAFE STATE");
     }
 
-    return 0;
-}
+    // Table Display
+    printf("\n\nProcess\tAllocation\tMax\tNeed\n");
 
+    for(i = 0; i < n; i++)
+    {
+        printf("P%d\t", i);
+
+        for(j = 0; j < r; j++)
+            printf("%3d", p[i].all[j]);
+
+        printf("\t");
+
+        for(j = 0; j < r; j++)
+            printf("%3d", p[i].max[j]);
+
+        printf("\t");
+
+        for(j = 0; j < r; j++)
+            printf("%3d", p[i].need[j]);
+
+        printf("\n");
+    }
+return 0;
+}
 
 ==============================================>>>>>>>>FCFS
 #include<stdio.h>
